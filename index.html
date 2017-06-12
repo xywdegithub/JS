@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+		<link href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+		<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+		<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js" ></script>
+		<script type="text/javascript" src="js/message.js" ></script>
+        
+		<style type="text/css">
+			body{background: url(img/4.jpg) no-repeat;background-size: cover;font-size: 16px;}
+			.form{background: rgba(255,255,255,0.2);width:400px;margin:100px auto;}
+			#login_form{display: block;}
+			#register_form{display: none;}
+			.fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
+			input[type="text"],input[type="password"]{padding-left:26px;}
+			.checkbox{padding-left:21px;}
+		.container .form.row #login_form .col-sm-9.col-md-9 .form-group #register_btn {
+	color: #333;
+}
+        </style>
+	</head>
+	<body>
+
+	<div class="container">
+		<div class="form row">
+			<form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="login_form">
+				<h3 class="form-title">用户登录</h3>
+               
+				<div class="col-sm-9 col-md-9">
+					<div class="form-group">
+						<i class="fa fa-user fa-lg"></i>
+						<input class="form-control required" type="text" id = "username" placeholder="Username" name="username" autofocus maxlength="20"/>
+					</div>
+					<div class="form-group">
+							<i class="fa fa-lock fa-lg"></i>
+							<input class="form-control required" type="password" id="password" placeholder="Password" name="password" maxlength="8"/>
+					</div>
+					<div class="form-group">
+						<label class="checkbox">
+							<input type="checkbox" name="remember" value="1"/> Remember me
+						</label>
+						<hr />
+						<a href="javascript:;" id="register_btn" class="">用户注册</a>
+					</div>
+					<div class="form-group">		
+                     <input name="提交" type="submit" class="btn btn-success pull-right" id="login_btn" value="Login "/>   
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="form row">
+			<form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form">
+				<h3 class="form-title">Login to your account</h3>
+				<div class="col-sm-9 col-md-9">
+					<div class="form-group">
+						<i class="fa fa-user fa-lg"></i>
+						<input class="form-control required" type="text" placeholder="Username" name="username" autofocus/>
+					</div>
+					<div class="form-group">
+							<i class="fa fa-lock fa-lg"></i>
+							<input class="form-control required" type="password" placeholder="Password" id="register_password" name="password"/>
+					</div>
+					<div class="form-group">
+							<i class="fa fa-check fa-lg"></i>
+							<input class="form-control required" type="password" placeholder="Re-type Your Password" name="rpassword"/>
+					</div>
+					<div class="form-group">
+							<i class="fa fa-envelope fa-lg"></i>
+							<input class="form-control eamil" type="text" placeholder="Email" name="email"/>
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-success pull-right" value="Sign Up "/>
+						<input type="submit" class="btn btn-info pull-left" id="back_btn" value="Back"/>
+					</div>
+				</div>
+			</form>
+		</div>
+		</div>
+	<script  language="javascript" type="text/javascript" src="js/main.js" >
+	
+    var conn, rs; 
+/*获取数据库连接*/
+	function getConnection() { 
+	
+    //创建数据库连接对象
+	var conn = new ActiveXObject("ADODB.Connection");
+//创建数据集对象
+	var rs = new ActiveXObject("ADODB.Recordset");
+	try{
+//数据库连接串，具体配置请参考：http://www.connectionstrings.com/
+//如果不知道如何配置连接串，可以通过配置UDL文件后用文本编辑器打开获得
+		var connectionstring = "Driver={MySQL ODBC 5.2w Driver};Server=localhost;Database=2048;User=root; Password='';Option=3;Port=3306";
+//打开连接
+		conn.open(connectionstring);
+  
+//查询语句
+		var sql = " select * from tb_col ";
+//打开数据集（即执行查询语句）
+
+//遍历所有记录
+	while(!rs.eof){
+ //WScript是Windows 的脚本宿主对象，详细情况请在windows帮助里查找。
+ //WScript.Echo输出记录的内容
+ 		WScript.Echo(rs.Fields("id") + "\t" + rs.Fields("name") + "\n");
+  
+ //下一条记录
+ 		rs.moveNext();
+	}
+//关闭记录集
+	rs.close();
+//关闭数据库连接
+	conn.close();
+	} catch(e){
+//异常报告
+		WScript.Echo(e.message);
+	} finally{
+//
+	}
+} 
+</script>
+	</body>
+
+</html>
